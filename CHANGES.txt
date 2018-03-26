@@ -1,0 +1,107 @@
+
+Release Notes - Kafka - Version 0.7
+
+** Upgrade order
+    * In this release the wire format changed, so did the on-disk message
+    * format. To upgrade from 0.6 to 0.7, deploy 0.7 to consumers first, then
+    * the brokers, and lastly the producers. This is so that the downstream
+    * components are ready to understand messages sent in the new format. The
+    * details of the changes can be found here -
+    * https://cwiki.apache.org/confluence/display/KAFKA/Compression
+
+** Features
+    * Kafka now supports block level compression.  See
+    * https://cwiki.apache.org/confluence/display/KAFKA/Compression for
+    * details. Currently only gzip is supported.
+    * Log retention can now depend on space (log.retention.size)
+
+** Bug
+    * [KAFKA-88] - Producer perf test fails against localhost with > 10 threads
+    * [KAFKA-91] - zkclient does not show up in pom
+    * [KAFKA-107] - Bug in serialize and collate logic in the DefaultEventHandler
+    * [KAFKA-109] - CompressionUtils introduces a GZIP header while compressing empty message sets
+    * [KAFKA-110] - Bug in the collate logic of the DefaultEventHandler dispatches empty list of messages using the producer
+    * [KAFKA-111] - A bug in the iterator of the ByteBufferMessageSet returns incorrect offsets when it encounters a compressed empty message set
+    * [KAFKA-115] - Kafka server access log does not log request details coming from a MultiProduceRequest
+    * [KAFKA-116] - AsyncProducer shutdown logic causes data loss
+    * [KAFKA-117] - The FetcherRunnable busy waits on empty fetch requests 
+    * [KAFKA-124] - Console consumer does not exit if consuming process dies
+    * [KAFKA-125] - tooBigRequestIsRejected fails with unexpected Exceptoin
+    * [KAFKA-126] - Log flush should complete upon broker shutdown
+    * [KAFKA-128] - DumpLogSegments outputs wrong offsets
+    * [KAFKA-129] - ZK-based producer can throw an unexpceted exception when sending a message
+    * [KAFKA-131] - Hadoop Consumer goes into an infinite loop when  kafka.request.limit is set to -1
+    * [KAFKA-135] - the ruby kafka gem is not functional
+    * [KAFKA-138] - Bug in the queue timeout logic of the async producer
+    * [KAFKA-145] - Kafka server mirror shutdown bug
+    * [KAFKA-146] - testUnreachableServer sporadically fails
+    * [KAFKA-147] - kafka integration tests fail on a fresh checkout
+    * [KAFKA-148] - Shutdown During a Log Flush Throws Exception, Triggers Startup in Recovery Mode
+    * [KAFKA-149] - Current perf directory has buggy perf tests
+    * [KAFKA-154] - ZK consumer may lose a chunk worth of message during rebalance in some rare cases
+    * [KAFKA-159] - Php Client support for compression attribute
+    * [KAFKA-160] - ZK consumer gets into infinite loop if a message is larger than fetch size
+    * [KAFKA-161] - Producer using broker list does not load balance requests across multiple partitions on a broker
+    * [KAFKA-207] - AsyncProducerStats is not a singleton
+    * [KAFKA-216] - Add nunit license to the NOTICE file
+    * [KAFKA-221] - LICENSE and NOTICE problems in Kafka 0.7
+
+
+
+** Improvement
+    * [KAFKA-3] - Consumer needs a pluggable decoder
+    * [KAFKA-82] - upgrade zkclient library as of 2011/04/12
+    * [KAFKA-84] - commit offset before consumer shutdown
+    * [KAFKA-85] - Enhancements to .NET client
+    * [KAFKA-89] - consumer should initialize to a valid offset
+    * [KAFKA-90] - remove in tree zk jar
+    * [KAFKA-92] - upgrade to latest stable 0.7.x sbt
+    * [KAFKA-101] - Avoid creating a new topic by the consumer
+    * [KAFKA-103] - Make whitelist/blacklist mirror configs more consistent
+    * [KAFKA-112] - Improve the command line tools in the bin directory to use the compression feature correctly
+    * [KAFKA-113] - test log4j properties shouldn't be turned off
+    * [KAFKA-114] - Replace tabs with spaces
+    * [KAFKA-118] - Producer performance tool should use the new blocking async producer instead of the sleep timeout hack
+    * [KAFKA-120] - Code clean up in FetcherRunnable and ZookeeperConsumerConnector
+    * [KAFKA-122] - Add more info in output of DumpLogSegments
+    * [KAFKA-132] - Reduce Unnecessary Filesystem Writes for Logs Without Unflushed Events
+    * [KAFKA-136] - A JMX bean that reports #message/sec in consumer
+    * [KAFKA-137] - Fix ASF license headers for C# client
+    * [KAFKA-144] - kafka-server-start.sh ignores JMX_PORT
+    * [KAFKA-150] - Confusing NodeExistsException failing kafka broker startup
+    * [KAFKA-151] - Standard .rat-excludes file
+    * [KAFKA-152] - Include payload size in DumpLogSegments
+    * [KAFKA-153] - Add compression to C# client
+    * [KAFKA-164] - Config should default to a higher-throughput configuration for log.flush.interval
+    * [KAFKA-165] - Add helper script for zkCli.sh
+    * [KAFKA-195] - change ProducerShell to use high level producer
+
+** New Feature
+    * [KAFKA-70] - Introduce retention setting that depends on space
+    * [KAFKA-78] - add optional mx4j support to expose jmx over http
+    * [KAFKA-79] - Introduce the compression feature in Kafka
+    * [KAFKA-130] - Provide a default producer for receiving messages from STDIN
+    * [KAFKA-140] - Expose total metrics through MBeans as well
+    * [KAFKA-162] - Upgrade python producer to the new message format version
+
+
+
+
+
+
+
+** Task
+    * [KAFKA-141] - Check and make sure that the files that have been donated have been updated to reflect the new ASF copyright
+    * [KAFKA-142] - Check and make sure that for all code included with the distribution that is not under the Apache license, we have the right to combine with Apache-licensed code and redistribute
+    * [KAFKA-143] - Check and make sure that all source code distributed by the project is covered by one or more approved licenses
+    * [KAFKA-177] - Remove the clojure client until it is correctly implemented and refactored
+    * [KAFKA-211] - Fix LICENSE file to include MIT and SCALA license
+    * [KAFKA-222] - Mavenize contrib
+
+
+** Test
+    * [KAFKA-108] - A new unit test for ByteBufferMessageSet iterator
+
+
+
+
